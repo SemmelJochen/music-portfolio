@@ -1,0 +1,19 @@
+.menu-item:hover {
+    border-bottom: solid 3px#dd8808;
+    cursor: pointer;
+}
+
+.menu-item {
+    font-size: large;
+    border-bottom-color: #dd8808;
+    transition: border-bottom 0.3s ease 0.1s;
+    will-change: border-bottom;
+}
+.active .menu-item{
+    border-bottom: solid 3px#dd8808;
+}
+
+.active::after {
+    border-bottom: 0px#dd8808;
+    transition: border-bottom 0.3 ease;
+}

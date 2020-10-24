@@ -1,0 +1,101 @@
+
+.stars1,
+.stars2,
+.stars3,
+.stars4,
+.moon,
+.saturn,
+.jupiter,
+.uranus {
+  position: fixed;
+  background-size: cover;
+  background-position: center center;
+  will-change: transform;
+  overflow-x: hidden;
+  width: 80%;
+  height: 100%;
+}
+
+.stars1 {
+  background-image: url("../../resources/vectors/stars.svg");
+  background-repeat: repeat;
+}
+.stars2 {
+  opacity: 0.8;
+  background-image: url("../../resources/vectors/stars.svg");
+  background-repeat: repeat;
+  transform: translate( -50%);
+}
+
+.stars3 {
+  opacity: 0.6;
+  background-image: url("../../resources/vectors/stars.svg");
+  background-repeat: repeat;
+  transform: translate( 50%);
+}
+
+.stars4 {
+  opacity: 0.4;
+  background-image: url("../../resources/vectors/stars.svg");
+  background-repeat: repeat;
+}
+
+.moon {
+  opacity: 0.7;
+  background-image: url("../../resources/vectors/moon.svg");
+  background-size: 25%;
+  background-repeat: no-repeat;
+  top: 10%;
+  left: 0.2rem;
+}
+
+.saturn {
+  opacity: 0.5;
+  background-image: url("../../resources/vectors/saturn.svg");
+  background-size: 6%;
+  top: 40%;
+  background-repeat: no-repeat;
+  right: 1rem;
+}
+
+.jupiter {
+  opacity: 0.5;
+  background-image: url("../../resources/vectors/jupiter.svg");
+  background-size: 6%;
+  top: 50%;
+  background-repeat: no-repeat;
+}
+
+.uranus {
+  opacity: 0.5;
+  background-image: url("../../resources/vectors/uranus.svg");
+  background-size: 5%;
+  background-repeat: no-repeat;
+  right: 20px;
+}
+
+.fog {
+  opacity: 0.1;
+  background-image: url("../../resources/images/fog.png");
+  height: 100%;
+  width: 120%;
+  position: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  will-change: transform;
+  overflow-x: hidden;
+}
+
+.stars02 {
+  opacity: 0.5;
+  background-image: url("../../resources/vectors/stars2.svg");
+  background-repeat: repeat;
+  position: fixed;
+  background-size: cover;
+  background-position: center center;
+  will-change: transform;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
