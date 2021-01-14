@@ -9,11 +9,45 @@
     transition: border-bottom 0.3s ease 0.1s;
     will-change: border-bottom;
 }
-.active .menu-item{
+
+.active .menu-item {
     border-bottom: solid 3px#dd8808;
 }
 
 .active::after {
     border-bottom: 0px#dd8808;
     transition: border-bottom 0.3 ease;
+}
+
+.navbar {
+    height: 60px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+    margin: 0;
+}
+
+/* styles for mobile devices */
+
+@media (max-width: 758px) {
+    .navbar {
+        display: none;
+    }
+    .mobile-navbar {
+        display: flex;
+    }
+}
+
+/* styles for desktop devices */
+
+@media (min-width: 759px) {
+    .navbar {
+        display: flex;
+    }
+    .mobile-navbar {
+        display: none;
+    }
 }

@@ -3,12 +3,11 @@ import NestedBackground from './components/background/NestedBackground.jsx'
 import { ThemeProvider, createMuiTheme, CssBaseline, responsiveFontSizes } from '@material-ui/core'
 import Home from './routes/Home.jsx';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navbar from './components/navbar/Navbar.jsx';
 import Others from './routes/Others.jsx';
 import AboutMe from './routes/AboutMe.jsx';
 import Releases from './routes/Releases.jsx';
 import NoMatch from './routes/NoMatch.jsx';
-import Footer from './components/footer/Footer.jsx'
+
 const lightTheme = responsiveFontSizes(createMuiTheme({
   palette: {
     type: "light",
@@ -16,7 +15,8 @@ const lightTheme = responsiveFontSizes(createMuiTheme({
       main: '#f7a222',
     },
     secondary: {
-      main: '#749fa3',
+      main: '#a3bfc2',
+      backup: "#749fa3"
     },
     text: {
       primary: "#000000",
@@ -105,7 +105,7 @@ class App extends React.Component {
         <CssBaseline />
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <NestedBackground
-            navbar={<Navbar routes={routes} />}
+            routes={routes}
             darkModeChecked={this.state.darkMode}
             darkModeChange={this.darkModeSwitchChange}>
 

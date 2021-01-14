@@ -1,9 +1,11 @@
 import React from 'react'
 import './NestedBackground.css'
 import { useSpring, animated } from 'react-spring'
-import { makeStyles, Switch, Typography, withTheme } from '@material-ui/core'
+import { makeStyles, Switch, withTheme } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import Footer from '../footer/Footer'
+import StyledTypography from '../typography/StyledTypography'
+import Navbar from '../navbar/Navbar'
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 const trans1 = (x, y) => `translate3d(${x / 10}px,${y / 10}px,0)`
@@ -45,49 +47,42 @@ function NestedBackground(props) {
 
       <animated.div className="fog" style={{ transform: get.xy.interpolate(trans1) }} />
       <animated.div className="fog" style={{ transform: get.xy.interpolate(trans2) }} />
-      <div style={{
-        justifyContent: "flex-start",
-        height: "60px",
-        position: "absolute",
-        top: "10px",
-        display: "flex",
-        alignItems: "center",
-        zIndex: "1",
-        width: "100vw"
-      }}>
-        {props.navbar}
+      <div className="navbar-container">
+        {/* Switch */}
         <div style={{
-          position: "absolute",
-          display:"flex",
+          display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-end",
+          width: "100%",
+          position: "absolute"
         }}>
-          <Typography>Dark Mode</Typography>
-          <Switch color="primary" defaultChecked={props.darkModeChecked} onChange={props.darkModeChange}/>
+          <StyledTypography>Dark Mode</StyledTypography>
+          <Switch color="primary" defaultChecked={props.darkModeChecked} onChange={props.darkModeChange} />
         </div>
+        <Navbar routes={props.routes} />
       </div>
 
       <div style={{
         position: "absolute",
         top: "70px",
         width: "90vw",
-        height: 'calc(100vh - 70px)',
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        //height: 'calc(100vh - 70px)',
+        display: "block",
+        //justifyContent: "center",
+        //alignItems: "center",
         //flexDirection: "column"
       }}>
         {props.children}
-        <Footer/>
+        <Footer />
       </div>
 
     </div>
   )
 }
 NestedBackground.propTypes = {
-    darkModeChecked: PropTypes.bool,
-    darkModeChange: PropTypes.func.isRequired,
+  darkModeChecked: PropTypes.bool,
+  darkModeChange: PropTypes.func.isRequired,
 }
 
 export default withTheme(NestedBackground);

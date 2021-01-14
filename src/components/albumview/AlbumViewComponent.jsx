@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link, makeStyles, Typography } from '@material-ui/core';
+import { Link, makeStyles } from '@material-ui/core';
+import StyledTypography from '../typography/StyledTypography'
 import './AlbumViewComponent.css'
 
 const useStyles = makeStyles(theme => ({
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     titleFont: {
         color: theme.palette.primary.light,
         cursor: "pointer"
-    }
+    },
 }));
 
 export default function AlbumViewComponent(props) {
@@ -69,7 +70,7 @@ export default function AlbumViewComponent(props) {
                     height: "320px",
                     position: "relative",
                     display: "inline-block",
-                }} onClick={onClick}>
+                }}>
                 <img
                     className="albumicon albumicon-front"
                     alt={name}
@@ -105,21 +106,21 @@ export default function AlbumViewComponent(props) {
                     allow="encrypted-media" />
             </div>
             <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-                <Typography className={classes.titleFont} variant="h6">
+                <StyledTypography className={classes.titleFont} variant="h6">
                     <Link href={external_urls.spotify}>
                         <b>
                             {name}
                         </b>
                     </Link>
-                </Typography>
-                <Typography variant="body1">
+                </StyledTypography>
+                <StyledTypography variant="body1">
                     <b>
                         {(typeof date.getFullYear() == "number" && !isNaN(date.getFullYear())) ?
                             date.getFullYear()
                             :
                             "No date available"}
                     </b>
-                </Typography>
+                </StyledTypography>
             </div>
         </div>
     )
@@ -128,8 +129,4 @@ export default function AlbumViewComponent(props) {
 function embedLink(link) {
     var embeddedLink = link.replace('/album', '/embed/album')
     return embeddedLink;
-}
-
-function onClick() {
-    document.getElementsByClassName('albumicon').classList.toggle('is-flipped');
 }

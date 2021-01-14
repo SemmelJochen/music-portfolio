@@ -1,12 +1,4 @@
-
-.stars1,
-.stars2,
-.stars3,
-.stars4,
-.moon,
-.saturn,
-.jupiter,
-.uranus {
+.stars1, .stars2, .stars3, .stars4, .moon, .saturn, .jupiter, .uranus {
   position: fixed;
   background-size: cover;
   background-position: center center;
@@ -20,6 +12,7 @@
   background-image: url("../../resources/vectors/stars.svg");
   background-repeat: repeat;
 }
+
 .stars2 {
   opacity: 0.8;
   background-image: url("../../resources/vectors/stars.svg");
@@ -96,6 +89,26 @@
   background-position: center center;
   will-change: transform;
   overflow-x: hidden;
-  width: 100%;
+  width: 110%;
   height: 100%;
+}
+
+.navbar-container {
+  height: 60px;
+  position: absolute;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  width: 100vw;
+}
+@media (max-width: 758) {
+  .navbar-container {
+    justify-content: flex-start;
+  }
+}
+@media (min-width: 759) {
+  .navbar-container {
+    justify-content: center;
+  }
 }

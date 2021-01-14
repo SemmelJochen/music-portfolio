@@ -3,7 +3,7 @@ import React from 'react'
 
 const useStyles = makeStyles(theme => ({
     font: {
-        color: theme.palette.text
+        color: theme.palette.text.primary
     }
 }));
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import StyledTypography from '../components/typography/StyledTypography'
 
 export default function NoMatch() {
     return (
-        <Typography variant="h1">No Match</Typography>
+        <StyledTypography variant="h1">No Match</StyledTypography>
     )
 }
