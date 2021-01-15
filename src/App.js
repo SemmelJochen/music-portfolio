@@ -103,7 +103,9 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={this.state.theme}>
         <CssBaseline />
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter 
+        //basename={process.env.PUBLIC_URL}
+        >
           <NestedBackground
             routes={routes}
             darkModeChecked={this.state.darkMode}

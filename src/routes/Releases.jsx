@@ -48,6 +48,28 @@ class Releases extends Component {
             .catch((error) => console.error(error));
 
     }
+    async fetchSpotifyData(link) {
+        var encodedData = window.btoa(process.env.REACT_APP_CLIENT_ID + ':' + process.env.REACT_APP_CLIENT_KEY);
+        var authHeaderString = 'Basic ' + encodedData;
+        //default limit: 20
+        var token = await fetch("https://accounts.spotify.com/api/token", {
+            body: "grant_type=client_credentials",
+            headers: {
+                Authorization: authHeaderString,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST"
+        }).then(res => res.json()).then(function (res) { return res }).catch((error) => console.log(error));
+
+        var albums = await fetch(link, {
+            headers: {
+                Authorization: token.token_type + " " + token.access_token
+            }
+        }).then(res => res.json()).then(function (res) { return res }).catch((error) => console.log(error));
+
+        return albums;
+
+    }
 
     fetchAlbumData(link, token) {
         //const _this = this;
@@ -74,8 +96,18 @@ class Releases extends Component {
         }
     }
 
-    componentDidMount() {
-        this.fetchAccessToken();
+    async componentDidMount() {
+        var albums = await this.fetchSpotifyData("https://api.spotify.com/v1/artists/3FK7gXaxK53ARn5sSbgr5P/albums");
+        var albumItems = albums.items;
+        var sortedByReleaseDate = albumItems.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+        this.setState(
+            { 
+                albums: sortedByReleaseDate,
+                dataFetched: true,
+                
+         });
+        
+        console.log(sortedByReleaseDate);
     }
 
     embedLink(link) {
