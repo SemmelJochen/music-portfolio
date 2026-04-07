@@ -1,18 +1,24 @@
-body {
-  margin: 0;
-  font-family: 'Times', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import "tailwindcss";
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #f7a222;
+  --color-primary-dark: #f69709;
+  --color-accent: #dd8808;
+  --color-surface: #a3bfc2;
+  --color-surface-dark: #1f2d2e;
+  --font-family-body: 'Times', 'Georgia', serif;
 }
 
 @font-face {
   font-family: 'Times';
   src: url(./resources/fonts/timr65w.ttf);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

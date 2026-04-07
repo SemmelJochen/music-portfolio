@@ -4,12 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.0",
     "@react-spring/web": "^9.7.5",
-    "lottie-react": "^2.4.0",
-    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"
@@ -23,8 +18,13 @@
     "deploy": "pnpm run cleanup && gh-pages -d dist"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.3.4",
     "gh-pages": "^6.3.0",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2",
     "vite": "^6.3.1"
   },
   "pnpm": {
