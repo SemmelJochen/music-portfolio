@@ -5,7 +5,7 @@ import AlbumViewComponent from '../components/albumview/AlbumViewComponent';
 import { LoadingAnimation } from '../components/lottie/LoadingAnimation';
 
 async function fetchSpotifyData(link) {
-    const encodedData = window.btoa(process.env.REACT_APP_CLIENT_ID + ':' + process.env.REACT_APP_CLIENT_KEY);
+    const encodedData = window.btoa(import.meta.env.VITE_CLIENT_ID + ':' + import.meta.env.VITE_CLIENT_KEY);
     const authHeaderString = 'Basic ' + encodedData;
 
     const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
