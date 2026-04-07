@@ -1,16 +1,8 @@
-import { makeStyles, Typography } from '@material-ui/core'
-import React from 'react'
-
-const useStyles = makeStyles(theme => ({
-    font: {
-        color: theme.palette.text.primary
-    }
-}));
+import { Typography } from '@mui/material'
 
 export default function StyledTypography(props) {
-    const classes = useStyles();
     return (
-        <Typography className={classes.font} {...props}>
+        <Typography sx={{ color: 'text.primary' }} {...props}>
             {props.children}
         </Typography>
     )

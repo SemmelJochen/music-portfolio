@@ -1,50 +1,10 @@
-import React from 'react'
-import { Link, makeStyles } from '@material-ui/core';
+import { Link } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import StyledTypography from '../typography/StyledTypography'
 import './AlbumViewComponent.css'
 
-const useStyles = makeStyles(theme => ({
-    cover: {
-        width: "320px",
-        height: "320px"
-    },
-    albumDiv: {
-        margin: "10px",
-        borderRadius: "3px",
-        width: "320px",
-        height: "320px",
-        position: "relative",
-        display: "inline-block",
-    },
-    playButton: {
-        position: "absolute",
-        top: "110px",
-        left: "110px",
-        backgroundColor: "black",
-        opacity: 0,
-        '&:hover': {
-            opacity: 0.8
-        },
-        cursor: "pointer",
-        borderRadius: "50px",
-        width: "100px",
-        height: "100px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    playButtonInner: {
-        width: "50px",
-        color: "white"
-    },
-    titleFont: {
-        color: theme.palette.primary.light,
-        cursor: "pointer"
-    },
-}));
-
 export default function AlbumViewComponent(props) {
-    const classes = useStyles();
+    const theme = useTheme();
     const { name, id, release_date, external_urls, images } = props.album;
     const releaseDate = release_date.split('-');
     const date = new Date(releaseDate[0], releaseDate[1], releaseDate[2]);
@@ -106,7 +66,7 @@ export default function AlbumViewComponent(props) {
                     allow="encrypted-media" />
             </div>
             <div style={{ marginLeft: "10px", marginRight: "10px" }}>
-                <StyledTypography className={classes.titleFont} variant="h6">
+                <StyledTypography sx={{ color: theme.palette.primary.light, cursor: "pointer" }} variant="h6">
                     <Link href={external_urls.spotify}>
                         <b>
                             {name}

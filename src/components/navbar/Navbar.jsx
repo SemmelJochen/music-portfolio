@@ -1,156 +1,96 @@
-import React from 'react'
-import { Button, ListItem, makeStyles, SwipeableDrawer } from '@material-ui/core'
+import { useState } from 'react'
+import { Button, ListItem, SwipeableDrawer } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 
+function NavLinks({ routes }) {
+    const theme = useTheme();
+    const linkStyle = { textDecoration: "none", color: theme.palette.text.primary };
 
-const useStyles = makeStyles((theme) => ({
-    toggleButton: {
-        display: "flex",
-        height: "20px",
-        width: "30px",
-        padding: 0,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        boxSizing: "border-box",
-        marginLeft: "1rem",
-        //overwrite @MUI theme button styles
-        minWidth: 0,
-        verticalAlign: "unset"
-    },
-    toggleButtonLine: {
-        width: "30px",
-        height: "2px",
-        background: theme.palette.text.primary,
-    },
-    navLinks: {
-        textDecoration: "none",
-        color: theme.palette.text.primary,
-    }
-}));
+    const navItems = [
+        { route: routes.home, exact: true },
+        { route: routes.others },
+        { route: routes.aboutMe },
+        { route: routes.releases },
+    ];
+
+    return navItems.map(({ route, exact }) => (
+        <div key={route.path} style={{ padding: "16px" }}>
+            <NavLink
+                style={linkStyle}
+                className={({ isActive }) => isActive ? "active" : ""}
+                end={exact}
+                to={route.path}
+            >
+                <ListItem className="menu-item" style={{ padding: "0px" }}>{route.name}</ListItem>
+            </NavLink>
+        </div>
+    ));
+}
 
 export default function Navbar(props) {
     const { routes } = props;
-    const classes = useStyles();
     return (
         <>
             <div className="navbar">
-
-                <div style={{ padding: "16px" }}>
-                    <NavLink
-                        className={classes.navLinks}
-                        activeClassName="active"
-                        exact
-                        to={routes.home.path}
-                    >
-                        <ListItem className="menu-item" style={{ padding: "0px" }}>{routes.home.name}</ListItem>
-                    </NavLink>
-                </div>
-                <div style={{ padding: "16px" }}>
-                    <NavLink
-                        className={classes.navLinks}
-                        activeClassName="active"
-                        to={routes.others.path}
-                    >
-                        <ListItem className="menu-item" style={{ padding: "0px" }}>{routes.others.name}</ListItem>
-                    </NavLink>
-                </div>
-                <div style={{ padding: "16px" }}>
-                    <NavLink
-                        className={classes.navLinks}
-                        activeClassName="active"
-                        to={routes.aboutMe.path}
-                    >
-                        <ListItem className="menu-item" style={{ padding: "0px" }} >{routes.aboutMe.name}</ListItem>
-                    </NavLink>
-                </div>
-                <div style={{ padding: "16px" }}>
-                    <NavLink
-                        className={classes.navLinks}
-                        activeClassName="active"
-                        to={routes.releases.path}
-                    >
-                        <ListItem className="menu-item" style={{ padding: "0px" }} >{routes.releases.name}</ListItem>
-                    </NavLink>
-                </div>
+                <NavLinks routes={routes} />
             </div>
 
             <div className="mobile-navbar">
-                {NavbarDrawer(routes)}
+                <NavbarDrawer routes={routes} />
             </div>
         </>
     )
 }
 
-function NavbarDrawer(routes) {
-    const [state, setState] = React.useState({
-        open: false,
-    });
-    const toggleDrawer = (open) => (event) => {
+function NavbarDrawer({ routes }) {
+    const [open, setOpen] = useState(false);
+    const theme = useTheme();
+
+    const toggleDrawer = (isOpen) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        setState({ ...open, open: open });
+        setOpen(isOpen);
     }
-    const classes = useStyles();
-    /**
-     * for improving performance on iOS - if there are problems
-     * const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-     * <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} />
-     */
+
+    const toggleButtonLine = {
+        width: "30px",
+        height: "2px",
+        background: theme.palette.text.primary,
+    };
+
     return (
         <>
-            <Button className={classes.toggleButton} onClick={toggleDrawer(true)}>
-                <div className={classes.toggleButtonLine} />
-                <div className={classes.toggleButtonLine} />
-                <div className={classes.toggleButtonLine} />
+            <Button
+                sx={{
+                    display: "flex",
+                    height: "20px",
+                    width: "30px",
+                    padding: 0,
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    boxSizing: "border-box",
+                    marginLeft: "1rem",
+                    minWidth: 0,
+                    verticalAlign: "unset"
+                }}
+                onClick={toggleDrawer(true)}
+            >
+                <div style={toggleButtonLine} />
+                <div style={toggleButtonLine} />
+                <div style={toggleButtonLine} />
             </Button>
             <SwipeableDrawer
                 anchor="left"
-                open={state.open}
+                open={open}
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer(true)}
             >
                 <div>
-                    <div style={{ padding: "16px" }}>
-                        <NavLink
-                            className={classes.navLinks}
-                            activeClassName="active"
-                            exact
-                            to={routes.home.path}
-                        >
-                            <ListItem className="menu-item" style={{ padding: "0px" }}>{routes.home.name}</ListItem>
-                        </NavLink>
-                    </div>
-                    <div style={{ padding: "16px" }}>
-                        <NavLink
-                            className={classes.navLinks}
-                            activeClassName="active"
-                            to={routes.others.path}
-                        >
-                            <ListItem className="menu-item" style={{ padding: "0px" }}>{routes.others.name}</ListItem>
-                        </NavLink>
-                    </div>
-                    <div style={{ padding: "16px" }}>
-                        <NavLink
-                            className={classes.navLinks}
-                            activeClassName="active"
-                            to={routes.aboutMe.path}
-                        >
-                            <ListItem className="menu-item" style={{ padding: "0px" }} >{routes.aboutMe.name}</ListItem>
-                        </NavLink>
-                    </div>
-                    <div style={{ padding: "16px" }}>
-                        <NavLink
-                            className={classes.navLinks}
-                            activeClassName="active"
-                            to={routes.releases.path}
-                        >
-                            <ListItem className="menu-item" style={{ padding: "0px" }} >{routes.releases.name}</ListItem>
-                        </NavLink>
-                    </div>
+                    <NavLinks routes={routes} />
                 </div>
-
             </SwipeableDrawer>
         </>
     )

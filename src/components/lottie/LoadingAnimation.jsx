@@ -1,17 +1,7 @@
-import React from 'react';
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react';
 import animationData from '../../resources/lotties/loading.json';
 
 export const LoadingAnimation = () => {
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
-        }
-    };
-
     return (
         <div style={{
             position: "fixed",
@@ -28,16 +18,13 @@ export const LoadingAnimation = () => {
                 width: "100%",
                 height: "100%"
             }}>
-            <Lottie
-                options={defaultOptions}
-                height={150}
-                width={150}
-                style={{ margin: "0" }}
-                isClickToPauseDisabled={true} 
-                //speed={2} -- not working (default: 1)
-            />
+                <Lottie
+                    animationData={animationData}
+                    loop={true}
+                    autoplay={true}
+                    style={{ height: 150, width: 150, margin: "0" }}
+                />
             </div>
-            
         </div>
     );
 }

@@ -1,22 +1,21 @@
-import React from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import NestedBackground from './components/background/NestedBackground.jsx'
-import { ThemeProvider, createMuiTheme, CssBaseline, responsiveFontSizes } from '@material-ui/core'
+import { ThemeProvider, createTheme, CssBaseline, responsiveFontSizes } from '@mui/material'
 import Home from './routes/Home.jsx';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Others from './routes/Others.jsx';
 import AboutMe from './routes/AboutMe.jsx';
 import Releases from './routes/Releases.jsx';
 import NoMatch from './routes/NoMatch.jsx';
 
-const lightTheme = responsiveFontSizes(createMuiTheme({
+const lightTheme = responsiveFontSizes(createTheme({
   palette: {
-    type: "light",
+    mode: "light",
     primary: {
       main: '#f7a222',
     },
     secondary: {
       main: '#a3bfc2',
-      backup: "#749fa3"
     },
     text: {
       primary: "#000000",
@@ -28,9 +27,9 @@ const lightTheme = responsiveFontSizes(createMuiTheme({
     fontFamily: 'Times',
   },
 }));
-const darkTheme = responsiveFontSizes(createMuiTheme({
+const darkTheme = responsiveFontSizes(createTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
       main: '#f69709',
     },
@@ -50,80 +49,66 @@ const darkTheme = responsiveFontSizes(createMuiTheme({
 const routes = {
   home: {
     name: "Home",
-    component: Home,
     path: "/",
   },
   others: {
     name: "Others",
-    component: Others,
     path: "/others"
   },
   aboutMe: {
     name: "About Me",
-    component: AboutMe,
     path: "/about-me"
   },
   releases: {
     name: "Music",
-    component: Releases,
     path: "/music"
   },
 }
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      darkMode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false,
-      theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : lightTheme,
-    }
-    this.darkModeSwitchChange = this.darkModeSwitchChange.bind(this);
-  }
+function App() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [darkMode, setDarkMode] = useState(prefersDark);
+  const [theme, setTheme] = useState(prefersDark ? darkTheme : lightTheme);
 
-  componentDidMount() {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      const newColorScheme = e.matches ? "dark" : "light";
-      if (newColorScheme === "light") {
-        this.setState({ theme: lightTheme });
-      } else {
-        this.setState({ theme: darkTheme });
-      }
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e) => {
+      setTheme(e.matches ? darkTheme : lightTheme);
+      setDarkMode(e.matches);
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  const darkModeSwitchChange = useCallback(() => {
+    setDarkMode(prev => {
+      const next = !prev;
+      setTheme(next ? darkTheme : lightTheme);
+      return next;
     });
-  }
-  darkModeSwitchChange() {
-    if (this.state.darkMode) {
-      this.setState({ theme: lightTheme });
-      this.setState({ darkMode: !this.state.darkMode })
-    } else if (!this.state.darkMode) {
-      this.setState({ theme: darkTheme });
-      this.setState({ darkMode: !this.state.darkMode })
-    }
-  }
-  render() {
-    return (
-      <ThemeProvider theme={this.state.theme}>
-        <CssBaseline />
-        <BrowserRouter 
-        //basename={process.env.PUBLIC_URL}
-        >
-          <NestedBackground
-            routes={routes}
-            darkModeChecked={this.state.darkMode}
-            darkModeChange={this.darkModeSwitchChange}>
+  }, []);
 
-            <Switch>
-              <Route exact path={routes.home.path} component={routes.home.component} />
-              <Route path={routes.aboutMe.path} component={routes.aboutMe.component} />
-              <Route path={routes.others.path} component={routes.others.component} />
-              <Route path={routes.releases.path} component={routes.releases.component} />
-              <Route component={NoMatch} />
-            </Switch>
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <NestedBackground
+          routes={routes}
+          darkModeChecked={darkMode}
+          darkModeChange={darkModeSwitchChange}>
 
-          </NestedBackground>
-        </BrowserRouter>
-      </ThemeProvider>
-    )
-  }
+          <Routes>
+            <Route path={routes.home.path} element={<Home />} />
+            <Route path={routes.aboutMe.path} element={<AboutMe />} />
+            <Route path={routes.others.path} element={<Others />} />
+            <Route path={routes.releases.path} element={<Releases />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+
+        </NestedBackground>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
 export default App;

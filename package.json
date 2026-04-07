@@ -3,22 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.10.0",
-    "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-lottie": "^1.2.3",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "react-spring": "^8.0.27"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.0",
+    "@react-spring/web": "^9.7.5",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "lottie-react": "^2.4.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^4.2.4"
   },
   "scripts": {
     "cleanup": "rm -rf node_modules/gh-pages/.cache",
-    "predeploy": "npm run build",
-    "deploy": "npm run cleanup && gh-pages -d build",
+    "predeploy": "pnpm run build",
+    "deploy": "pnpm run cleanup && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,6 +43,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.0.0"
+    "gh-pages": "^6.3.0"
   }
 }

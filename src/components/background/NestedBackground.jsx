@@ -1,7 +1,7 @@
-import React from 'react'
 import './NestedBackground.css'
-import { useSpring, animated } from 'react-spring'
-import { makeStyles, Switch, withTheme } from '@material-ui/core'
+import { useSpring, animated } from '@react-spring/web'
+import { Switch } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 import Footer from '../footer/Footer'
 import StyledTypography from '../typography/StyledTypography'
@@ -16,8 +16,11 @@ const trans5 = (x, y) => `translate3d(${x / 10 - 250}px,${y / 9 - 200}px,0)`
 const trans6 = (x, y) => `translate3d(${x / 15 + 35}px,${y / 15 - 230}px,0)`
 const trans7 = (x, y) => `translate3d(${x / 100 + 35}px,${y / 100}px,0)`
 
-const useStyles = makeStyles(theme => ({
-  root: {
+function NestedBackground(props) {
+  const theme = useTheme();
+  const [springs, api] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }));
+
+  const rootStyle = {
     width: "100%",
     height: "100%",
     background: theme.palette.secondary.main,
@@ -26,27 +29,23 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     overflowX: "hidden",
     position: "absolute",
-  }
-}));
+  };
 
-function NestedBackground(props) {
-  const classes = useStyles();
-  const [get, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }));
   return (
-    <div className={classes.root} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
-      <animated.div className="stars1" style={{ transform: get.xy.interpolate(trans1) }} />
-      <animated.div className="stars2" style={{ transform: get.xy.interpolate(trans2) }} />
-      <animated.div className="stars3" style={{ transform: get.xy.interpolate(trans3) }} />
-      <animated.div className="stars4" style={{ transform: get.xy.interpolate(trans4) }} />
-      <animated.div className="stars02" style={{ transform: get.xy.interpolate(trans7) }} />
+    <div style={rootStyle} onMouseMove={({ clientX: x, clientY: y }) => api.start({ xy: calc(x, y) })}>
+      <animated.div className="stars1" style={{ transform: springs.xy.to(trans1) }} />
+      <animated.div className="stars2" style={{ transform: springs.xy.to(trans2) }} />
+      <animated.div className="stars3" style={{ transform: springs.xy.to(trans3) }} />
+      <animated.div className="stars4" style={{ transform: springs.xy.to(trans4) }} />
+      <animated.div className="stars02" style={{ transform: springs.xy.to(trans7) }} />
 
-      <animated.div className="moon" style={{ transform: get.xy.interpolate(trans2) }} />
-      <animated.div className="saturn" style={{ transform: get.xy.interpolate(trans1) }} />
-      <animated.div className="jupiter" style={{ transform: get.xy.interpolate(trans5) }} />
-      <animated.div className="uranus" style={{ transform: get.xy.interpolate(trans6) }} />
+      <animated.div className="moon" style={{ transform: springs.xy.to(trans2) }} />
+      <animated.div className="saturn" style={{ transform: springs.xy.to(trans1) }} />
+      <animated.div className="jupiter" style={{ transform: springs.xy.to(trans5) }} />
+      <animated.div className="uranus" style={{ transform: springs.xy.to(trans6) }} />
 
-      <animated.div className="fog" style={{ transform: get.xy.interpolate(trans1) }} />
-      <animated.div className="fog" style={{ transform: get.xy.interpolate(trans2) }} />
+      <animated.div className="fog" style={{ transform: springs.xy.to(trans1) }} />
+      <animated.div className="fog" style={{ transform: springs.xy.to(trans2) }} />
       <div className="navbar-container">
         {/* Switch */}
         <div style={{
@@ -67,11 +66,7 @@ function NestedBackground(props) {
         position: "absolute",
         top: "70px",
         width: "90vw",
-        //height: 'calc(100vh - 70px)',
         display: "block",
-        //justifyContent: "center",
-        //alignItems: "center",
-        //flexDirection: "column"
       }}>
         {props.children}
         <Footer />
@@ -85,4 +80,4 @@ NestedBackground.propTypes = {
   darkModeChange: PropTypes.func.isRequired,
 }
 
-export default withTheme(NestedBackground);
+export default NestedBackground;
