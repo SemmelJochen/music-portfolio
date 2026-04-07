@@ -4,7 +4,7 @@ import { useSpring, animated } from '@react-spring/web';
 import Footer from '../footer/Footer';
 import Navbar from '../navbar/Navbar';
 import AudioPlayer from '../ui/AudioPlayer';
-import type { RoutesMap } from '../../App';
+import type { RoutesMap } from '../../router';
 
 const calc = (x: number, y: number): [number, number] => [x - window.innerWidth / 2, y - window.innerHeight / 2];
 const trans1 = (x: number, y: number) => `translate3d(${x / 10}px,${y / 10}px,0)`;

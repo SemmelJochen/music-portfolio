@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import type { RoutesMap } from '../../App';
+import { Link } from '@tanstack/react-router';
+import type { RoutesMap } from '../../router';
 
 interface Props {
   routes: RoutesMap;
@@ -8,28 +8,25 @@ interface Props {
 
 function NavLinks({ routes, onClick }: { routes: RoutesMap; onClick?: () => void }) {
   const navItems = [
-    { route: routes.home, end: true },
-    { route: routes.others, end: false },
-    { route: routes.aboutMe, end: false },
-    { route: routes.releases, end: false },
+    { route: routes.home, exact: true },
+    { route: routes.others, exact: false },
+    { route: routes.aboutMe, exact: false },
+    { route: routes.releases, exact: false },
   ];
 
   return (
     <>
-      {navItems.map(({ route, end }) => (
+      {navItems.map(({ route, exact }) => (
         <div key={route.path} className="px-4">
-          <NavLink
-            className={({ isActive }) =>
-              `text-black dark:text-white no-underline text-lg transition-all duration-200 pb-1 border-b-3 ${
-                isActive ? 'border-accent dark:border-accent-dark' : 'border-transparent hover:border-accent/50 dark:hover:border-accent-dark/50'
-              }`
-            }
-            end={end}
+          <Link
             to={route.path}
+            activeOptions={{ exact }}
+            className="text-black dark:text-white no-underline text-lg transition-all duration-200 pb-1 border-b-3 border-transparent [&.active]:border-accent dark:[&.active]:border-accent-dark hover:border-accent/50 dark:hover:border-accent-dark/50"
+            activeProps={{ className: 'active' }}
             onClick={onClick}
           >
             {route.name}
-          </NavLink>
+          </Link>
         </div>
       ))}
     </>
