@@ -6,6 +6,7 @@ import Others from './routes/Others';
 import AboutMe from './routes/AboutMe';
 import Releases from './routes/Releases';
 import NoMatch from './routes/NoMatch';
+import { AudioProvider } from './context/AudioContext';
 
 export interface RouteConfig {
   name: string;
@@ -46,21 +47,23 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <NestedBackground
-        routes={routes}
-        darkMode={darkMode}
-        onToggleDarkMode={toggleDarkMode}
-      >
-        <Routes>
-          <Route path={routes.home.path} element={<Home />} />
-          <Route path={routes.aboutMe.path} element={<AboutMe />} />
-          <Route path={routes.others.path} element={<Others />} />
-          <Route path={routes.releases.path} element={<Releases />} />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </NestedBackground>
-    </BrowserRouter>
+    <AudioProvider>
+      <BrowserRouter>
+        <NestedBackground
+          routes={routes}
+          darkMode={darkMode}
+          onToggleDarkMode={toggleDarkMode}
+        >
+          <Routes>
+            <Route path={routes.home.path} element={<Home />} />
+            <Route path={routes.aboutMe.path} element={<AboutMe />} />
+            <Route path={routes.others.path} element={<Others />} />
+            <Route path={routes.releases.path} element={<Releases />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </NestedBackground>
+      </BrowserRouter>
+    </AudioProvider>
   );
 }
 

@@ -21,7 +21,7 @@ function NavLinks({ routes, onClick }: { routes: RoutesMap; onClick?: () => void
           <NavLink
             className={({ isActive }) =>
               `text-black dark:text-white no-underline text-lg transition-all duration-200 pb-1 border-b-3 ${
-                isActive ? 'border-accent' : 'border-transparent hover:border-accent'
+                isActive ? 'border-accent dark:border-accent-dark' : 'border-transparent hover:border-accent/50 dark:hover:border-accent-dark/50'
               }`
             }
             end={end}
@@ -63,7 +63,7 @@ export default function Navbar({ routes }: Props) {
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <nav className="absolute left-0 top-0 h-full w-64 bg-surface dark:bg-surface-dark shadow-xl p-6 flex flex-col gap-2 animate-slide-in">
+          <nav className="absolute left-0 top-0 h-full w-64 bg-surface dark:bg-surface-dark shadow-xl p-6 flex flex-col gap-2">
             <button
               onClick={() => setOpen(false)}
               className="self-end text-2xl text-black dark:text-white bg-transparent border-none cursor-pointer mb-4"

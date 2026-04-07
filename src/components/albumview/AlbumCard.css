@@ -1,7 +1,1 @@
-.album-card:hover .album-card-inner {
-  transform: rotateY(180deg);
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-}
+/* Intentionally minimal - styles handled by Tailwind */

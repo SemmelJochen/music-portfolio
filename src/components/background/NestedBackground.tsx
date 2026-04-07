@@ -3,6 +3,7 @@ import './NestedBackground.css';
 import { useSpring, animated } from '@react-spring/web';
 import Footer from '../footer/Footer';
 import Navbar from '../navbar/Navbar';
+import AudioPlayer from '../ui/AudioPlayer';
 import type { RoutesMap } from '../../App';
 
 const calc = (x: number, y: number): [number, number] => [x - window.innerWidth / 2, y - window.innerHeight / 2];
@@ -68,6 +69,8 @@ export default function NestedBackground({ routes, darkMode, onToggleDarkMode, c
         {children}
         <Footer />
       </div>
+
+      <AudioPlayer />
     </div>
   );
 }

@@ -102,12 +102,12 @@
   z-index: 1;
   width: 100vw;
 }
-@media (max-width: 758) {
+@media (max-width: 758px) {
   .navbar-container {
     justify-content: flex-start;
   }
 }
-@media (min-width: 759) {
+@media (min-width: 759px) {
   .navbar-container {
     justify-content: center;
   }

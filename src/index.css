@@ -1,19 +1,18 @@
 @import "tailwindcss";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #f7a222;
-  --color-primary-dark: #f69709;
-  --color-accent: #dd8808;
+  --color-primary: #7d5300;
+  --color-primary-dark: #f7a222;
+  --color-accent: #c17900;
+  --color-accent-dark: #f69709;
   --color-surface: #a3bfc2;
   --color-surface-dark: #1f2d2e;
-  --font-family-body: 'Times', 'Georgia', serif;
-}
-
-@font-face {
-  font-family: 'Times';
-  src: url(./resources/fonts/timr65w.ttf);
+  --font-family-body: 'Cormorant Garamond', 'Georgia', serif;
 }
 
 body {

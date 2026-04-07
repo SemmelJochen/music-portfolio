@@ -21,7 +21,7 @@ export default function AboutMe() {
           <p className="text-black/60 dark:text-white/60">
             Für Anfragen, Kollaborationen oder einfach nur zum Austausch &mdash;
             schreib gerne über die Social-Media-Kanäle auf der{' '}
-            <a href="/others" className="text-primary dark:text-primary-dark hover:underline">
+            <a href="/others" className="text-primary dark:text-primary-dark font-semibold hover:underline">
               Links-Seite
             </a>.
           </p>
